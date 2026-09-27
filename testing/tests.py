@@ -5,7 +5,7 @@ from pytest import raises
 from core.data_handlers import GestureHandler, ImageHandler, VideoHandler
 from core.processor import MediaPipeProcessor
 
-test_handler = GestureHandler()
+test_handler = GestureHandler(data_parent_folder=None)
 
 
 def test_no_file_index():
@@ -49,7 +49,7 @@ def test_starts_with_period():
 
 
 def test_load_frame_correct_shape():
-    handler = ImageHandler()
+    handler = ImageHandler(data_parent_folder=None)
     signs = ["A", "C", "F"]
     landmarks, labels = handler._load_frame("testing/letters_dataset", signs)
     assert landmarks.shape[1] == 126
@@ -57,7 +57,7 @@ def test_load_frame_correct_shape():
 
 
 def test_create_sequences_length():
-    handler = VideoHandler()
+    handler = VideoHandler(data_parent_folder=None)
     SEQUENCE_LENGTH = 10
     signs = ["ADIOS", "BONITO"]
     sequences, _ = handler._create_sequences(
